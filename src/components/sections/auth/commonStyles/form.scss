@@ -1,0 +1,53 @@
+.component {
+    padding: 50px 300px;
+    background-color: #fff;
+
+    .form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        .button {
+            height: 50px;
+            background-color: #274193;
+        }
+
+        p {
+            color: red;
+        }
+
+        .cancel {
+            height: 50px;
+            color: black;
+            border: 1px solid rgb(172, 172, 172);
+
+            &:hover {
+                background-color: #fff;
+            }
+        }
+
+        .info {
+            margin-bottom: 20px;
+            text-align: center;
+
+            .header {
+                margin-top: 0px;
+                font-size: 33px;
+                color: #202146;
+            }
+
+            .line {
+                display: block;
+                margin: 0 auto 20px;
+                width: 200px;
+                height: 1px;
+                background-color: #ccc;
+            }
+
+            .description {
+                font-size: 14px;
+                color: #202146;
+            }
+        }
+    }
+}
