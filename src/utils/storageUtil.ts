@@ -4,15 +4,12 @@ type TokenObject = {
 };
 
 const storageUtil = {
-  setTokens: (tokenObj: TokenObject): void => {
+  setToken: (tokenObj: TokenObject): void => {
     localStorage.setItem("accessToken", tokenObj.accessToken);
-    localStorage.setItem("refreshToken", tokenObj.refreshToken);
   },
-  getAccessToken: (): string | null => localStorage.getItem("accessToken"),
-  getRefreshToken: (): string | null => localStorage.getItem("refreshToken"),
-  clearTokens: (): void => {
+  getToken: (): string | null => localStorage.getItem("accessToken"),
+  clearToken: (): void => {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
   },
 };
 

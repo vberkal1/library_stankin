@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormDataAuth } from '../../../stores/authStore';
 import Step1 from '../../sections/auth/Step1';
 import Step2 from '../../sections/auth/Step2';
 import Step3 from '../../sections/auth/Step3';
@@ -18,14 +19,29 @@ export type SelectedLoginSection =
     | LoginSection.Restore
     | LoginSection.Email;
 
-const LoginPage: React.FC = () => {
+
+type LoginPageProps = {
+    submit: (formData: FormDataAuth) => Promise<void>;
+    token: string;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ submit, token }) => {
 
     const [selectedLoginSection, setSelectedLoginSection] =
         useState<SelectedLoginSection>(LoginSection.Login);
 
     const selectSection = (section: SelectedLoginSection): void => {
-        setSelectedLoginSection(section)
+        setSelectedLoginSection(section);
     };
+
+
+    if (token) {
+        return (
+            <div className={classes.component}>
+                <Step3 selectSection={selectSection} token={token} />
+            </div>
+        );
+    }
 
     switch (selectedLoginSection) {
         case LoginSection.Restore:
@@ -38,13 +54,14 @@ const LoginPage: React.FC = () => {
         case LoginSection.Email:
             return (
                 <div className={classes.component}>
-                    <Step4 selectSection={selectSection}/>
+                    <Step4 selectSection={selectSection} />
                 </div>
             );
         default:
             return (
                 <div className={classes.component}>
                     <Step1
+                        submit={submit}
                         selectSection={selectSection}
                     />
                 </div>

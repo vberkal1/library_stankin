@@ -10,6 +10,8 @@ import {
 import { SelectedLoginSection, LoginSection } from '../../../pages/LoginPage/LoginPage';
 import stankinLogo from '../assets/stankinLogo.png';
 import classes from './Step2.module.scss';
+import authStore from '../../../../stores/authStore';
+import { observer } from 'mobx-react-lite';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required('Поле не заполнено').email('Введите корректный email'),
@@ -34,6 +36,8 @@ const Step2: React.FC<Step2Props> = ({ selectSection }) => {
         },
         async onSubmit(formData) {
             console.log(formData);
+            await authStore.sendEmail(formData);
+            selectEmailSection();
         },
         validationSchema,
     });
@@ -46,10 +50,10 @@ const Step2: React.FC<Step2Props> = ({ selectSection }) => {
         selectSection(LoginSection.Email);
     }
 
-    const submit = (): void => {
-        submitForm();
-        selectEmailSection();
-    }
+    // const submit = (): void => {
+    //     submitForm();
+    //     // selectEmailSection();
+    // }
 
     return (
         <div className={classes.component}>
@@ -83,7 +87,7 @@ const Step2: React.FC<Step2Props> = ({ selectSection }) => {
                         className={classes.button}
                         fullWidth
                         variant="contained"
-                        onClick={submit}
+                        onClick={submitForm}
                     >
                         ДАЛЕЕ
                     </Button>
@@ -101,4 +105,4 @@ const Step2: React.FC<Step2Props> = ({ selectSection }) => {
     );
 };
 
-export default Step2;
+export default observer(Step2);

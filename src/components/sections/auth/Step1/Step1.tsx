@@ -11,11 +11,13 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { observer } from 'mobx-react-lite';
 
 import stankinLogo from '../assets/stankinLogo.png'
 import { SelectedLoginSection, LoginSection } from '../../../pages/LoginPage/LoginPage';
-import classes from './Step1.module.scss';
 import { ReactComponent as VisibleIcon } from '../assets/eye.svg';
+import { FormDataAuth } from '../../../../stores/authStore';
+import classes from './Step1.module.scss';
 
 const validationSchema = Yup.object().shape({
     login: Yup.string().required('Поле не заполнено'),
@@ -24,9 +26,10 @@ const validationSchema = Yup.object().shape({
 
 type Step1Props = {
     selectSection: (section: SelectedLoginSection) => void;
+    submit: (formData: FormDataAuth) => Promise<void>;
 }
 
-const Step1: React.FC<Step1Props> = ({ selectSection }) => {
+const Step1: React.FC<Step1Props> = ({ selectSection, submit }) => {
 
     const {
         values,
@@ -40,12 +43,12 @@ const Step1: React.FC<Step1Props> = ({ selectSection }) => {
             password: '',
         },
         async onSubmit(formData) {
-            console.log(formData);
+            submit(formData);
         },
         validationSchema,
     });
 
-    const [isVisibleIcon, setIsVisibleIcon] = useState<boolean>(true);
+    const [isVisibleIcon, setIsVisibleIcon] = useState<boolean>(false);
 
     const changeFormValues = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void => {
         handleChange(e);
@@ -122,4 +125,4 @@ const Step1: React.FC<Step1Props> = ({ selectSection }) => {
     );
 };
 
-export default Step1;
+export default observer(Step1);

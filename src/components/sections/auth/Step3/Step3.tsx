@@ -13,6 +13,8 @@ import * as Yup from 'yup';
 
 import stankinLogo from '../assets/stankinLogo.png'
 import { ReactComponent as VisibleIcon } from '../assets/eye.svg';
+import { LoginSection, SelectedLoginSection } from '../../../pages/LoginPage/LoginPage';
+import authStore from '../../../../stores/authStore';
 import classes from './Step3.module.scss';
 
 const validationSchema = Yup.object().shape({
@@ -20,7 +22,12 @@ const validationSchema = Yup.object().shape({
     confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Пароли не совпадают'),
 });
 
-const Step3: React.FC = () => {
+type Step3Props = {
+    token: string;
+    selectSection: (section: SelectedLoginSection) => void;
+}
+
+const Step3: React.FC<Step3Props> = ({ token, selectSection }) => {
 
     const {
         values,
@@ -34,7 +41,12 @@ const Step3: React.FC = () => {
             confirmPassword: '',
         },
         async onSubmit(formData) {
-            console.log(formData);
+            const { password } = formData;
+            await authStore.changePassword({ password, token });
+            // eslint-disable-next-line no-restricted-globals
+            location.href = 'http://localhost:3001';
+            selectSection(LoginSection.Login);
+
         },
         validationSchema,
     });
@@ -122,7 +134,7 @@ const Step3: React.FC = () => {
                         variant="contained"
                         onClick={submitForm}
                     >
-                        ВОЙТИ С НОВЫМ ПАРОЛЕМ
+                        ДАЛЕЕ
                     </Button>
                 </FormControl>
             </form>

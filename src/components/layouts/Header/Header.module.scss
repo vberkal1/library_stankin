@@ -1,0 +1,30 @@
+.component {
+    padding: 20px 70px;
+    a{
+        text-decoration: none;
+    }
+    .logo{
+        height: 100px;
+    }
+    .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .navigation{
+            display: flex;
+            gap: 70px;
+            border-bottom: 1px solid #ccc;
+            transition: all 1s;
+            .link,
+            .activeLink{
+                transition: all .7s;
+                color: rgb(94, 94, 94);
+                border-bottom: 4px solid white;
+            }
+            .activeLink{
+                color: black;
+                border-bottom: 4px solid rgb(6, 6, 146);
+            }
+        }
+    }
+}
