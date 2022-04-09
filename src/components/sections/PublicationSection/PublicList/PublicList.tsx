@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import styles from './PublicList.module.scss';
 import PublicCard from '../PublicCard';
@@ -10,16 +9,12 @@ import { PublicCard as PublicItem } from '../../../../stores/publicStore';
 import useInfinityScroll from '../../../../hooks/useInfinityScroll';
 import publicStore from '../../../../stores/publicStore/publicStore';
 
-// import { useInfinityScroll } from '../../../../../hooks';
-// import publicCard from '../publicCard';
-
-
 type PublicListProps = {
     allCards: Array<PublicItem>;
-    // observableElementRef: React.MutableRefObject<HTMLLIElement | null>;
+    clickHandler: (id: string) => void;
 }
 
-const PublicList: React.FC<PublicListProps> = ({ allCards }) => {
+const PublicList: React.FC<PublicListProps> = ({ allCards, clickHandler }) => {
     const { loadUpItems } = publicStore
 
 
@@ -35,15 +30,6 @@ const PublicList: React.FC<PublicListProps> = ({ allCards }) => {
         [allCards],
     );
 
-
-
-    const history = useHistory();
-    const { path } = useRouteMatch();
-
-    const navigateToDetailedItem = (id: string): void => {
-        history.push(`${path}/${id}`);
-    };
-
     const renderPublicCard = (
         publicItem: PublicItem,
         index: number,
@@ -51,9 +37,7 @@ const PublicList: React.FC<PublicListProps> = ({ allCards }) => {
     ): React.ReactNode => {
         const isLastItem: boolean = index === arr.length - 1;
 
-        const clickHandler = (): void => {
-            navigateToDetailedItem(publicItem.id);
-        };
+       
 
         return (
             <li
@@ -62,7 +46,7 @@ const PublicList: React.FC<PublicListProps> = ({ allCards }) => {
             >
                 <PublicCard
                     data={publicItem}
-                    onClick={clickHandler}
+                    onClick={() => clickHandler(publicItem.id)}
                 />
             </li>
         );

@@ -8,6 +8,7 @@ import {
 } from "mobx";
 
 import {
+  CoursesResponse,
   PublicCard,
   PublicRequestParams,
 } from "./publicStore.models";
@@ -65,6 +66,19 @@ class NewsStore {
     try {
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async loadFilters(): Promise<void> {
+    try {
+      // const a = await service.getCourses();
+      // const b = await service.getSpecialities();
+      const c = await service.getAuthors();
+      // console.log('a', a);
+      // console.log('b', b);
+      console.log('c', c);
+    } catch (error) {
+      
     }
   }
 

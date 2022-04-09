@@ -1,0 +1,55 @@
+.component {
+    margin: 0 20px;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        text-align: left;
+        margin-top: 20px;
+        padding: 0 80px 30px 20px;
+        font-weight: 700;
+        font-size: 24px;
+        color: #202146;
+    }
+
+    .close {
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .contentWrapper {
+        overflow: hidden;
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0 20px;
+        }
+        .info{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .list{
+            list-style-type: none;
+            padding-left: 0;
+            a{
+                text-decoration: none;
+            }
+        }
+    }
+}

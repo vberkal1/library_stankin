@@ -6,14 +6,51 @@ export type PublicResponse = {
   };
 };
 
+export type CoursesResponse = {
+  data: {
+    courses: Array<Course>;
+  };
+};
+export type SpecialitiesResponse = {
+  data: {
+    specialities: Array<Specialitie>;
+  };
+};
+export type AuthorsResponse = {
+  data: {
+    authors: Array<Author>;
+  };
+};
+
 export type PublicCard = {
   id: string;
   title: string;
-  specializationName: string;
-  specializationNumber: string;
+  content: string;
+  author: Author;
+  specializations: Array<Specialization>;
+  courses: Array<Course>;
+  files: Array<File>;
   createDate: string;
   editDate: string;
-  author: Author;
+};
+
+export type PublicRequestParams = {
+  limit: number;
+  offset: number;
+};
+
+export type DetailedCard = {
+  data: {
+    id: string;
+    title: string;
+    content: string;
+    createDate: string;
+    editDate: string;
+    author: Author;
+    specializations: Array<Specialization>;
+    courses: Array<Course>;
+    files: Array<File>;
+  };
 };
 
 type Author = {
@@ -23,7 +60,25 @@ type Author = {
   lastName: string;
 };
 
-export type PublicRequestParams = {
-  limit: number;
-  offset: number;
+type Specialization = {
+  id: number;
+  name: string;
+  number: string;
+};
+
+type Course = {
+  id: number;
+  name: string;
+  education_year: string;
+};
+type Specialitie = {
+  id: number;
+  name: string;
+  number: string;
+};
+
+type File = {
+  name: string;
+  location: string;
+  type: string;
 };

@@ -15,7 +15,9 @@ const PublicCard: React.FC<PublicCardProps> = ({ data, onClick }) => {
             <div className={styles.body}>
                 <div className={styles.list}>
                     <div className={styles.item}>
-                        Направление: {data.specializationName}
+                        Направления: {
+                            data.specializations.map(elem => `${elem.name} `)
+                        }
                     </div>
                     <div className={styles.item}>
                         Автор: {data.author.firstName}
@@ -26,6 +28,7 @@ const PublicCard: React.FC<PublicCardProps> = ({ data, onClick }) => {
                 </div>
                 <Button
                     className={styles.button}
+                    onClick={onClick}
                 >
                     ПОДРОБНЕЕ
                 </Button>
