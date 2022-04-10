@@ -53,7 +53,7 @@ const PublicationSection: React.FC = () => {
                             : <PublicList clickHandler={clickHandler} allCards={allCards} />
                     }
                 </div>
-                <Filter />
+                {/* <Filter /> */}
             </div>
         </div>
     );

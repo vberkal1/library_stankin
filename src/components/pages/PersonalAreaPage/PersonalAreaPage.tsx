@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Header from '../../layouts/Header';
+import AuthorsSection from '../../sections/AuthorsSection';
 import PublicationSection from '../../sections/PublicationSection';
 import NotFoundPage from '../NotFoundPage';
 
@@ -25,7 +26,7 @@ const PersonalAreaPage: React.FC<PersonalAreaPageProps> = ({ login, role }) => {
                         <div>news</div>
                     </Route>
                     <Route exact path={`${path}/authors`}>
-                        <div>authors</div>
+                        <AuthorsSection/>
                     </Route>
                     <Route exact path={`${path}/me`}>
                         <div>me</div>
