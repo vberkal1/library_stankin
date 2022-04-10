@@ -8,9 +8,12 @@ import {
 } from "mobx";
 
 import {
+  Author,
+  Course,
   CoursesResponse,
   PublicCard,
   PublicRequestParams,
+  Specialitie,
 } from "./publicStore.models";
 import service from "./publicStore.service";
 
@@ -20,6 +23,10 @@ const initialStoreValues = {
   limit: 10,
   offset: 0,
   allCardsUploaded: false,
+  authors: [],
+  courses: [],
+  specialities: [],
+  
   //   unreadCount: 0,
   //   selectedType: NewsItemTypes.General,
   //   publicNews: [],
@@ -37,6 +44,14 @@ class NewsStore {
 
   allCardsUploaded: boolean = initialStoreValues.allCardsUploaded;
 
+  specialities: Array<Specialitie> = initialStoreValues.specialities;
+  authors: Array<Author> = initialStoreValues.authors;
+  courses:  Array<Course> = initialStoreValues.courses;
+
+  activeSpecialities: Array<Specialitie> = initialStoreValues.specialities;
+  activeAuthors: Array<Author> = initialStoreValues.authors;
+  activeCourses:  Array<Course> = initialStoreValues.courses;
+
   //   unreadCount: number = initialStoreValues.unreadCount;
   //   allItemsUploaded: boolean = initialStoreValues.allItemsUploaded;
   //   selectedType: NewsItemType = initialStoreValues.selectedType;
@@ -49,12 +64,18 @@ class NewsStore {
     makeObservable(this, {
       cards: observable,
       allCardsUploaded: observable,
+      authors: observable,
+      courses: observable,
+      specialities: observable,
       loadItems: action.bound,
       loadUpItems: action.bound,
       loadDetailedItem: action.bound,
+      loadFilters: action.bound,
       allCards: computed,
     });
   }
+
+  
 
   resetStoreValues() {
     this.cards = initialStoreValues.cards;
@@ -71,14 +92,16 @@ class NewsStore {
 
   async loadFilters(): Promise<void> {
     try {
-      // const a = await service.getCourses();
-      // const b = await service.getSpecialities();
+      const a = await service.getCourses();
+      const b = await service.getSpecialities();
       const c = await service.getAuthors();
-      // console.log('a', a);
-      // console.log('b', b);
-      console.log('c', c);
-    } catch (error) {
-      
+      runInAction(() => {
+        this.courses = a.courses;
+        this.specialities = b.specialities;
+        this.authors = c.authors;
+      });
+      } catch (error) {
+      console.log(error);
     }
   }
 

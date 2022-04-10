@@ -1,6 +1,8 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
+import publicStore from '../../../../stores/publicStore/publicStore';
 import AutoComplite from '../../../common/AutoComplite';
 import system from './assets/system.png';
 import styles from './Filter.module.scss';
@@ -35,9 +37,9 @@ const Filter = () => {
                 <img src={system} alt="system" />
                 <h2 className={styles.title}>Фильтр</h2>
             </div>
-            <AutoComplite name={'Преподаватель'} />
-            <AutoComplite name={'Направление'} />
-            <AutoComplite name={'Группа'} />
+            <AutoComplite options={publicStore.authors} name={'Преподаватель'} />
+            <AutoComplite options={publicStore.specialities} name={'Направление'} />
+            <AutoComplite options={publicStore.courses} name={'Группа'} />
             <Button
                 variant="contained"
                 component="label"
@@ -60,4 +62,4 @@ const Filter = () => {
     );
 };
 
-export default Filter;
+export default observer(Filter);

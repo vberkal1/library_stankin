@@ -4,6 +4,7 @@ import {
   CoursesResponse,
   PublicRequestParams,
   PublicResponse,
+  SpecialitiesResponse,
 } from "./publicStore.models";
 
 class Service {
@@ -12,7 +13,8 @@ class Service {
   getPublicCards(requestParams: PublicRequestParams) {
     return axios({
       method: "post",
-      url: `${this.baseUrl}/get?offset=${requestParams.offset}&limit=${requestParams.limit}`,
+      url: `${this.baseUrl}/get?offset=${requestParams.offset}&limit=${requestParams.limit}
+      &courses=&specialities=&authors=`,
       //   data: bodyFormData,
       //   headers: { "Content-Type": "multipart/form-data" },
     }).then((response: AxiosResponse<PublicResponse>) => response.data.data);
@@ -27,7 +29,7 @@ class Service {
     return axios({
       method: "get",
       url: `http://stankinlibrary.ru/api/specialities/get`,
-    }).then((response: AxiosResponse<CoursesResponse>) => response.data.data);
+    }).then((response: AxiosResponse<SpecialitiesResponse>) => response.data.data);
   }
   getAuthors() {
     return axios({

@@ -53,25 +53,26 @@ export type DetailedCard = {
   };
 };
 
-type Author = {
+export type Author = {
   id: string;
   firstName: string;
   middleName: string;
   lastName: string;
+  name: string;
 };
 
-type Specialization = {
+export type Specialization = {
   id: number;
   name: string;
   number: string;
 };
 
-type Course = {
+export type Course = {
   id: number;
   name: string;
   education_year: string;
 };
-type Specialitie = {
+export type Specialitie = {
   id: number;
   name: string;
   number: string;
