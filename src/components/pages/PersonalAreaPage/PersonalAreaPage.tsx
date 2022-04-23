@@ -16,17 +16,20 @@ const PersonalAreaPage: React.FC<PersonalAreaPageProps> = ({ login, role }) => {
     const { path } = useRouteMatch();
     return (
         <div className={styles.component}>
-                <Header />
+            <Header />
             <div className={styles.content}>
                 <Switch>
-                    <Route path={`${path}/publications`}>
+                    <Route exact path={[
+                        `${path}/publications`,
+                        `${path}/publications/:id`
+                    ]}>
                         <PublicationSection />
                     </Route>
                     <Route exact path={`${path}/news`}>
                         <div>news</div>
                     </Route>
                     <Route exact path={`${path}/authors`}>
-                        <AuthorsSection/>
+                        <AuthorsSection />
                     </Route>
                     <Route exact path={`${path}/me`}>
                         <div>me</div>

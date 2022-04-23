@@ -17,7 +17,6 @@ import {
 } from "./publicStore.models";
 import service from "./publicStore.service";
 
-
 const initialStoreValues = {
   cards: [],
   limit: 10,
@@ -26,7 +25,7 @@ const initialStoreValues = {
   authors: [],
   courses: [],
   specialities: [],
-  
+
   //   unreadCount: 0,
   //   selectedType: NewsItemTypes.General,
   //   publicNews: [],
@@ -46,11 +45,11 @@ class NewsStore {
 
   specialities: Array<Specialitie> = initialStoreValues.specialities;
   authors: Array<Author> = initialStoreValues.authors;
-  courses:  Array<Course> = initialStoreValues.courses;
+  courses: Array<Course> = initialStoreValues.courses;
 
   activeSpecialities: Array<Specialitie> = initialStoreValues.specialities;
   activeAuthors: Array<Author> = initialStoreValues.authors;
-  activeCourses:  Array<Course> = initialStoreValues.courses;
+  activeCourses: Array<Course> = initialStoreValues.courses;
 
   //   unreadCount: number = initialStoreValues.unreadCount;
   //   allItemsUploaded: boolean = initialStoreValues.allItemsUploaded;
@@ -75,8 +74,6 @@ class NewsStore {
     });
   }
 
-  
-
   resetStoreValues() {
     this.cards = initialStoreValues.cards;
     this.limit = initialStoreValues.limit;
@@ -100,19 +97,30 @@ class NewsStore {
         this.specialities = b.specialities;
         this.authors = c.authors;
       });
-      } catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }
 
-  async loadItems(): Promise<void> {
+  async loadItems(
+    coursesString?: string,
+    specialitiesString?: string,
+    authorsString?: string
+  ): Promise<void> {
     this.cards = initialStoreValues.cards;
     this.offset = initialStoreValues.offset;
     this.allCardsUploaded = initialStoreValues.allCardsUploaded;
 
+    const courses = coursesString ? coursesString : "";
+    const specialities = specialitiesString ? specialitiesString : "";
+    const authors = authorsString ? authorsString : "";
+
     const requestParams: PublicRequestParams = {
       limit: this.limit,
       offset: this.offset,
+      courses,
+      specialities,
+      authors,
     };
 
     try {

@@ -37,6 +37,9 @@ export type PublicCard = {
 export type PublicRequestParams = {
   limit: number;
   offset: number;
+  courses?: string;
+  specialities?: string;
+  authors?: string;
 };
 
 export type DetailedCard = {

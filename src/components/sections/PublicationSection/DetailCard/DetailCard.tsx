@@ -11,7 +11,9 @@ type DetailCardProps = {
 }
 
 const DetailCard: React.FC<DetailCardProps> = ({ close, allCards, id }) => {
-    const cardInfo = allCards.filter(elem => elem.id === id)[0];
+    
+    const cardInfo = allCards.filter(elem => elem.id == id)[0];
+
     return (
         <div className={classes.component}>
             <div className={classes.header}>

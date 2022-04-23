@@ -14,7 +14,7 @@ function App() {
 
   const submit = async (formData: FormDataAuth): Promise<void> => {
     await authStore.auth(formData);
-    history.push('/personal-area/authors');
+    history.push('/personal-area/publications');
   }
 
   const [token, setToken] = useState<string>('');

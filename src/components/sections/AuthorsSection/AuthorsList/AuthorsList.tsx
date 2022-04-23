@@ -1,7 +1,15 @@
 import React from 'react';
-import classes from './AuthorsList.module.scss';
+import { observer } from 'mobx-react-lite';
+
+import styles from './AuthorsList.module.scss';
 import renderArray from '../../../../utils/renderArray';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { PublicCard as PublicItem } from '../../../../stores/publicStore';
+import AuthorsCard from '../AuthorsCard';
+
+type AuthorsListProps = {
+    clickHandler: (id: string) => void;
+}
 
 type Author = {
     id: string,
@@ -54,28 +62,28 @@ const allCards: Array<Author> = [
          «Операционные системы семейства Unix», «Системы управления промышленными роботами».`,
     },
     {
-        id: '6',
+        id: '7',
         name: 'Денисов Григорий Иванович',
         specialization: 'Информационные системы и технологии',
         description: `Руководство дипломным проектированием по тематикам
          «Операционные системы семейства Unix», «Системы управления промышленными роботами».`,
     },
     {
-        id: '6',
+        id: '8',
         name: 'Денисов Григорий Иванович',
         specialization: 'Информационные системы и технологии',
         description: `Руководство дипломным проектированием по тематикам
          «Операционные системы семейства Unix», «Системы управления промышленными роботами».`,
     },
     {
-        id: '6',
+        id: '9',
         name: 'Денисов Григорий Иванович',
         specialization: 'Информационные системы и технологии',
         description: `Руководство дипломным проектированием по тематикам
          «Операционные системы семейства Unix», «Системы управления промышленными роботами».`,
     },
     {
-        id: '6',
+        id: '10',
         name: 'Денисов Григорий Иванович',
         specialization: 'Информационные системы и технологии',
         description: `Руководство дипломным проектированием по тематикам
@@ -83,10 +91,9 @@ const allCards: Array<Author> = [
     },
 ]
 
-const AuthorsList: React.FC = () => {
-
-    const renderAuthorCard = (
-        publicItem: Author,
+const AuthorsList: React.FC<AuthorsListProps> = ({ clickHandler }) => {
+    const renderPublicCard = (
+        authorItem: Author,
         index: number,
         arr: Array<any>,
     ): React.ReactNode => {
@@ -94,24 +101,23 @@ const AuthorsList: React.FC = () => {
         return (
             <li
                 // ref={isLastItem ? observableElementRef : undefined}
-                key={publicItem.id}
+                key={authorItem.id}
             >
-                {/* <PublicCard
-                    data={publicItem}
-                    onClick={() => clickHandler(publicItem.id)}
-                /> */}
-                <div style={{height: 80, width: 100, backgroundColor: 'red'}}>sasasa</div>
+                <AuthorsCard
+                    card={authorItem}
+                    clickHandler={() => clickHandler(authorItem.id)}
+                />
             </li>
         );
     };
 
     // return loading ? <p>Загрузка...</p> : (
     return false ? <p>Загрузка...</p> : (
-        <Scrollbars className={classes.component}>
-            <ul className={classes.content}>
+        <Scrollbars className={styles.component}>
+            <ul className={styles.content}>
                 {renderArray<Author>(
                     allCards,
-                    renderAuthorCard,
+                    renderPublicCard,
                     'По выбранным фильтрам ничего не найдено.',
                 )}
             </ul>
@@ -119,4 +125,4 @@ const AuthorsList: React.FC = () => {
     );
 };
 
-export default AuthorsList;
+export default observer(AuthorsList);

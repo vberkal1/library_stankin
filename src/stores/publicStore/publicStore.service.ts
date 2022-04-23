@@ -13,8 +13,12 @@ class Service {
   getPublicCards(requestParams: PublicRequestParams) {
     return axios({
       method: "post",
-      url: `${this.baseUrl}/get?offset=${requestParams.offset}&limit=${requestParams.limit}
-      &courses=&specialities=&authors=`,
+      url: `${this.baseUrl}/get?
+      offset=${requestParams.offset}
+      &limit=${requestParams.limit}
+      &courses=${requestParams.courses}
+      &specialities=${requestParams.specialities}
+      &authors=${requestParams.authors}`,
       //   data: bodyFormData,
       //   headers: { "Content-Type": "multipart/form-data" },
     }).then((response: AxiosResponse<PublicResponse>) => response.data.data);
